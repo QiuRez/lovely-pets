@@ -27,6 +27,7 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             cd lovely-pets
+            git config --global --add safe.directory /${{secrets.SSH_USERNAME}}/lovely-pets
             git pull origin main
             yes | cp -f .env.example .env
             chmod -R 777 storage/
