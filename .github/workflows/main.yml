@@ -1,0 +1,46 @@
+name: Deploy to Hosting
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.0.2
+        with:
+          node-version: 20
+        
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.SSH_HOST}}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          server-dir: ./lovely-pets
+          protocol: ftps
+        
+      - name: SSH Build Project 
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd lovely-pets
+            cp -f .env.example .env
+            sed -i '/DB_PASSWORD=/a ${{ secrets.DB_PASSWORD }} ' .env
+            alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
+            sail composer install
+            sail composer dump-autoload
+            sail artisan migrate
+            sail artisan key:generate
+            sail artisan optimize
