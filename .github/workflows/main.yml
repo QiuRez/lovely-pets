@@ -37,9 +37,9 @@ jobs:
             chmod -R 777 bootstrap/cache
             chmod -R 777 vendor/composer
             sed -i 's/DB_PASSWORD=/DB_PASSWORD=${{secrets.DB_PASSWORD}}/ ' .env
-            vendor/bin/sail up -d
             vendor/bin/sail composer install
             vendor/bin/sail composer dump-autoload
+            vendor/bin/sail up -d
             vendor/bin/sail artisan key:generate
             vendor/bin/sail artisan optimize
             vendor/bin/sail artisan migrate
