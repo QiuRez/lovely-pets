@@ -48,6 +48,9 @@ jobs:
           script: |
             cd lovely-pets
             cp -f .env.example .env
+            chmod -R 775 storage/
+            chmod -R 775 storage/framework
+            chmod -R 775 bootstrap/cache
             sed -i '/DB_PASSWORD=/a ${{ secrets.DB_PASSWORD }} ' .env
             vendor/bin/sail composer install
             vendor/bin/sail composer dump-autoload
