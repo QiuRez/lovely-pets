@@ -18,16 +18,26 @@ jobs:
         uses: actions/setup-node@v4.0.2
         with:
           node-version: 20
-        
+
+                    
+
       - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ secrets.SSH_HOST}}
           username: ${{ secrets.SSH_USERNAME }}
+          server: ${{ secrets.SSH_HOST}}
           password: ${{ secrets.SSH_PASSWORD }}
-          server-dir: ./lovely-pets/
-          port: 22
-          protocol: ftps
+          remote_path: ./lovely-pets/
+        
+      # - name: 📂 Sync files
+      #   uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      #   with:
+      #     server: ${{ secrets.SSH_HOST}}
+      #     username: ${{ secrets.SSH_USERNAME }}
+      #     password: ${{ secrets.SSH_PASSWORD }}
+      #     server-dir: ./lovely-pets/
+      #     port: 22
+      #     protocol: ftps
         
       - name: SSH Build Project 
         uses: appleboy/ssh-action@v1.0.3
