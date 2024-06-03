@@ -49,9 +49,8 @@ jobs:
             cd lovely-pets
             cp -f .env.example .env
             sed -i '/DB_PASSWORD=/a ${{ secrets.DB_PASSWORD }} ' .env
-            alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
-            sail composer install
-            sail composer dump-autoload
-            sail artisan migrate
-            sail artisan key:generate
-            sail artisan optimize
+            vendor/bin/sail composer install
+            vendor/bin/sail composer dump-autoload
+            vendor/bin/sail artisan migrate
+            vendor/bin/sail artisan key:generate
+            vendor/bin/sail artisan optimize
