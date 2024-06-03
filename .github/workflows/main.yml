@@ -26,7 +26,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           server-dir: ./lovely-pets/
-          protocol: ftps
+          protocol: sftp
         
       - name: SSH Build Project 
         uses: appleboy/ssh-action@v1.0.3
