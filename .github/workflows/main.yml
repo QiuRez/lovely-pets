@@ -36,6 +36,7 @@ jobs:
             chmod -R 777 storage/framework
             chmod -R 777 bootstrap/cache
             chmod -R 777 vendor/composer
+            chmod -R 777 .env
             sed -i 's/DB_PASSWORD=/DB_PASSWORD=${{secrets.DB_PASSWORD}}/ ' .env
             vendor/bin/sail composer install
             vendor/bin/sail composer dump-autoload
