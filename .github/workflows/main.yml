@@ -29,14 +29,14 @@ jobs:
 
       - name: SFTP uploader
         uses: wangyucode/sftp-upload-action@v2.0.2
-          with:
-            host: ${{ secrets.SSH_HOST }}
-            password: ${{ secrets.SSH_PASSWORD }}
-            username: ${{ secrets.SSH_USERNAME }}
-            localDir: './public'
-            remoteDir: '/lovely-pets/public'
-            forceUpload: true
-            exclude: 'assets,index.php,.htaccess,robots.txt'
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          username: ${{ secrets.SSH_USERNAME }}
+          localDir: './public'
+          remoteDir: '/lovely-pets/public'
+          forceUpload: true
+          exclude: 'assets,index.php,.htaccess,robots.txt'
 
             
 
