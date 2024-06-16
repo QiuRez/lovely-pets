@@ -34,7 +34,7 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           username: ${{ secrets.SSH_USERNAME }}
           localDir: './public'
-          remoteDir: '/lovely-pets/public'
+          remoteDir: './lovely-pets/public'
           forceUpload: true
           exclude: 'assets,index.php,.htaccess,robots.txt'
 
