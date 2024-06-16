@@ -25,6 +25,21 @@ jobs:
       - name: Node Build Project
         run: npm run build
 
+                    
+
+      - name: SFTP uploader
+        uses: wangyucode/sftp-upload-action@v2.0.2
+          with:
+            host: ${{ secrets.SSH_HOST }}
+            password: ${{ secrets.SSH_PASSWORD }}
+            username: ${{ secrets.SSH_USERNAME }}
+            localDir: './public'
+            remoteDir: '/lovely-pets/public'
+            forceUpload: true
+            exclude: 'assets,index.php,.htaccess,robots.txt'
+
+            
+
       - name: SSH Build Project 
         uses: appleboy/ssh-action@v1.0.3
         with:
