@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class PetController extends Controller
 {
-    public function index()
+    public function pet()
     {
-        return view('pet');
+        return Inertia::render('Pet');
+    }
+
+    public function list()
+    {
+        return Inertia::render('PetList');
     }
 }
