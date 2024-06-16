@@ -19,6 +19,12 @@ jobs:
         with:
           node-version: 20
 
+      - name: Install dependencies
+        run: npm install
+
+      - name: Node Build Project
+        run: npm run build
+
       - name: SSH Build Project 
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -26,21 +32,16 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
+            chmod -R 777 lovely-pets
             cd lovely-pets
             git config --global --add safe.directory /${{secrets.SSH_USERNAME}}/lovely-pets
             git clean -d -f .
             git pull origin main
             yes | cp -f .env.example .env
-            chmod -R 777 storage/
-            chmod -R 777 storage/logs
-            chmod -R 777 storage/framework
-            chmod -R 777 bootstrap/cache
-            chmod -R 777 vendor/composer
-            chmod -R 777 .env
             sed -i 's/DB_PASSWORD=/DB_PASSWORD=${{secrets.DB_PASSWORD}}/ ' .env
             vendor/bin/sail composer install
             vendor/bin/sail composer dump-autoload
-            vendor/bin/sail up -d
             vendor/bin/sail artisan key:generate
-            vendor/bin/sail artisan optimize
             vendor/bin/sail artisan migrate
+            vendor/bin/sail artisan optimize
+            vendor/bin/sail up -d
