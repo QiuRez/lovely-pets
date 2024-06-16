@@ -31,7 +31,7 @@ jobs:
           server: ${{ secrets.SSH_HOST }}
           password: ${{ secrets.SSH_PASSWORD }}
           username: ${{ secrets.SSH_USERNAME }}
-          local_path: './public/build/*'
+          local_path: './public/build'
           remote_path: './lovely-pets/public/build'
           delete_remote_files: true
           sftp_only: true
