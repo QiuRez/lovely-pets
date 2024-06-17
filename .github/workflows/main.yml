@@ -35,20 +35,6 @@ jobs:
           remote_path: './lovely-pets/public/build'
           delete_remote_files: true
           sftp_only: true
-              
-
-      # - name: SFTP uploader
-      #   uses: wangyucode/sftp-upload-action@v2.0.2
-      #   with:
-      #     host: ${{ secrets.SSH_HOST }}
-      #     password: ${{ secrets.SSH_PASSWORD }}
-      #     username: ${{ secrets.SSH_USERNAME }}
-      #     localDir: './public'
-      #     remoteDir: './lovely-pets/public'
-      #     forceUpload: true
-      #     exclude: 'assets,index.php,.htaccess,robots.txt'
-
-            
 
       - name: SSH Build Project 
         uses: appleboy/ssh-action@v1.0.3
@@ -59,6 +45,7 @@ jobs:
           script: |
             chmod -R 777 lovely-pets
             cd lovely-pets
+            docker-compose up --build -d
             git config --global --add safe.directory /${{secrets.SSH_USERNAME}}/lovely-pets
             git clean -d -f .
             git reset --hard
