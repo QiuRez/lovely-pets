@@ -11,7 +11,7 @@
 <style scoped>
     header {
         width: 100%;
-        height: 30px;
+        height: 24px;
         background-color: bisque;
         position: relative;
         display: flex;

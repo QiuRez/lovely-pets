@@ -1,45 +1,47 @@
 <template>
     <Header />
-    <Form
-        action="#"
-        method="post"
-        class="authForm"
-        :validation-schema="schema"
-        v-slot="{ errors,  isSubmitting }"
-        @submit="onSubmit"
-    >
-        <h3>Вход</h3>
-        <span v-if="page.props.AuthError">{{ page.props.AuthError }}</span>
-        <label for="">
-            Почта
-            <Field
-                name="email"
-                type="email"
-                :class="errors.email ? 'fieldError' : ''"
-            />
-        </label>
-        <label for="">
-            Пароль
-            <Field
-                name="password"
-                type="password"
-                :class="errors.password ? 'fieldError' : ''"
-            />
-        </label>
-        <label for="">
-            <Field
-                name="remember"
-                type="checkbox"
-                :value="true"
-            />
-        </label>
-        <button
-            type="submit"
-            :disabled="isSubmitting"
+    <h4 class="titleAuth">Вход</h4>
+    <div class="authBlock">
+        <Form
+            action="#"
+            method="post"
+            class="authForm"
+            :validation-schema="schema"
+            v-slot="{ errors,  isSubmitting }"
+            @submit="onSubmit"
         >
-            Зарегистрироваться
-        </button>
-    </Form>
+            <span v-if="page.props.AuthError">{{ page.props.AuthError }}</span>
+            <label for="">
+                Почта
+                <Field
+                    name="email"
+                    type="email"
+                    :class="errors.email ? 'fieldError' : ''"
+                />
+            </label>
+            <label for="">
+                Пароль
+                <Field
+                    name="password"
+                    type="password"
+                    :class="errors.password ? 'fieldError' : ''"
+                />
+            </label>
+            <label for="">
+                <Field
+                    name="remember"
+                    type="checkbox"
+                    :value="true"
+                />
+            </label>
+            <button
+                type="submit"
+                :disabled="isSubmitting"
+            >
+                Зарегистрироваться
+            </button>
+        </Form>
+    </div>
 </template>
 
 <script setup>

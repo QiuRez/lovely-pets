@@ -1,58 +1,63 @@
 <template>
     <Header />
-    <Form
-        action="#"
-        method="post"
-        class="authForm"
-        :validation-schema="schema"
-        v-slot="{ errors,  isSubmitting }"
-        @submit="onSubmit"
-    >
-        <h3>Регистрация</h3>
-        <label for="">
-            <Field
-                name="username"
-                type="text"
-                :class="errors.username ? 'fieldError' : ''"
-            />
-            <span v-if="props?.errors?.username">Имя пользователя уже занято</span>
-        </label>
-        <label for="">
-            <Field
-                name="email"
-                type="email"
-                :class="errors.email ? 'fieldError' : ''"
-            />
-            <span v-if="props?.errors?.email">Такая почта уже существует</span>
-        </label>
-        <label for="">
-            <Field
-                name="password"
-                type="password"
-                :class="errors.password ? 'fieldError' : ''"
-            />
-        </label>
-        <label for="">
-            <Field
-                name="password_confirmation"
-                type="password"
-                :class="errors.password_confirmation ? 'fieldError' : ''"
-            />
-        </label>
-        <label for="">
-            <Field
-                name="remember"
-                type="checkbox"
-                :value="true"
-            />
-        </label>
-        <button
-            type="submit"
-            :disabled="isSubmitting"
+    <h4 class="titleAuth">Регистрация</h4>
+        <Form
+            action="#"
+            method="post"
+            class="authForm"
+            :validation-schema="schema"
+            v-slot="{ errors,  isSubmitting }"
+            @submit="onSubmit"
         >
-            Зарегистрироваться
-        </button>
-    </Form>
+            <label for="">
+                Имя пользователя
+                <Field
+                    name="username"
+                    type="text"
+                    :class="errors.username ? 'fieldError' : ''"
+                />
+<!--                <span v-if="props?.errors?.username">Имя пользователя уже занято</span>-->
+            </label>
+            <label for="">
+                Почта
+                <Field
+                    name="email"
+                    type="email"
+                    :class="errors.email ? 'fieldError' : ''"
+                />
+<!--                <span v-if="props?.errors?.email">Такая почта уже существует</span>-->
+            </label>
+            <label for="">
+                Пароль
+                <Field
+                    name="password"
+                    type="password"
+                    :class="errors.password ? 'fieldError' : ''"
+                />
+            </label>
+            <label for="">
+                Повторите пароль
+                <Field
+                    name="password_confirmation"
+                    type="password"
+                    :class="errors.password_confirmation ? 'fieldError' : ''"
+                />
+            </label>
+            <label for="" id="labelRemember">
+                Запомнить меня
+                <Field
+                    name="remember"
+                    type="checkbox"
+                    :value="true"
+                />
+            </label>
+            <button
+                type="submit"
+                :disabled="isSubmitting"
+            >
+                Зарегистрироваться
+            </button>
+        </Form>
 </template>
 
 <script setup>
